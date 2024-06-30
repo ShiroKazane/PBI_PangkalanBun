@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PBI Pangkalan Bun</title>
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <meta name="description" content="Pusat Barang Import Termurah di Pangkalan Bun">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFB382;  
+            background: -webkit-linear-gradient(to left, #FAC898, #FFB382);
+            min-height: 100vh;
+            height: fit-content;
+            text-overflow: ellipsis;
+            user-select: none;
+            -ms-overflow-style: none;
+            -webkit-tap-highlight-color: transparent;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        header {
+            z-index: 3;
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 30px);
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: .6s;
+            padding: 15px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+
+            & .logo {
+                position: relative;
+                font-weight: 700;
+                padding: 5px 8px;
+                color: white;
+                background: rgba(255, 179, 130, .8);
+                backdrop-filter: blur(10px);
+                border-radius: 6px;
+                text-decoration: none;
+                font-size: 1.2em;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                transition: .6s;
+                cursor: pointer;
+            }
+
+            & .search {
+                width: 32px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                transition: width .4s ease;
+
+                & .searchIcon {
+                    color: white;
+                    background: #FFB382;
+                    border-radius: 50%;
+                    width: 32px;
+                    height: 32px;
+                    padding: 4px;
+                    cursor: pointer;
+
+                    & .material-symbols-rounded {
+                        font-variation-settings:
+                        'FILL' 0,
+                        'wght' 400,
+                        'GRAD' 0,
+                        'opsz' 24;
+                    }
+                }
+
+                & input {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 14px;
+                    border: none;
+                    outline: none;
+                    padding: 5px;
+                    width: 100%;
+                    display: none;
+                    transition: width .4s;
+                }
+
+                &.expanded {
+                    width: 200px;
+                    background: white;
+                    border-radius: 20px;
+                    border: 1px solid rgba(255, 179, 130, .4);
+
+                    & .searchIcon {
+                        color: #FFB382;
+                        background: none;
+                    }
+
+                    & input {
+                        margin: 0 10px;
+                        display: block;
+                    }
+                }
+            }
+
+            &.sticky {
+                background: rgba(255, 255, 255, .1);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(255, 255, 255, .2);
+            }
+        }
+
+        section {
+            position: relative;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, .1);
+            backdrop-filter: blur(10px);
+            min-height: fit-content;
+            width: calc(100% - 30px);
+            max-width: 1200px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+            padding: 20px;
+
+            & .content {
+                color: white;
+                text-align: center;
+                margin: auto auto 15px;
+                cursor: default;
+
+                & h2 {
+                    font-size: 2em;
+                    text-shadow: 2px 2px 0 rgba(0, 0, 0, .1);
+                }
+
+                & p {
+                    font-size: 1em;
+                    font-weight: 600;
+                    text-shadow: 2px 2px 0 rgba(0, 0, 0, .1);
+                }
+            }
+
+            & .divider {
+                content: '';
+                display: block;
+                width: 128px;
+                border-top: 2px solid rgba(255, 255, 255, .8);
+                margin: 20px auto;
+            }
+
+            & .product {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+
+                & .card {
+                    background: white;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+                    overflow: hidden;
+                    text-align: center;
+                    transition: transform .3s;
+
+                    &:hover {
+                        transform: scale(1.01);
+                        box-shadow: 0 4px 16px rgba(0, 0, 0, .1);
+
+                        & button {
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
+
+                    & img {
+                        width: 100%;
+                        height: auto;
+                        aspect-ratio: 1 / 1;
+                        object-fit: cover;
+                    }
+
+                    & h3 {
+                        color: #242424;
+                        display: flex;
+                        margin: 10px;
+                        align-items: center;
+                        justify-content: center;
+                        min-height: 48px;
+                        font-size: 1em;
+                        word-break: break-all;
+                    }
+
+                    & h6 {
+                        color: #FFB382;
+                        margin: 15px;
+                        font-size: 1em;
+                    }
+
+                    & button {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: #FFB382;
+                        color: white;
+                        font-size: 1em;
+                        border: none;
+                        border-radius: 24px;
+                        padding: 10px 20px;
+                        width: 128px;
+                        cursor: pointer;
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: opacity .3s ease, visibility .3s ease;
+                    }
+                }
+
+                & .rating {
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 15px;
+
+                    & .material-symbols-rounded {
+                        color: #FFB382;
+                        margin: 0 2px;
+                        font-variation-settings:
+                            'FILL' 0,
+                            'wght' 400,
+                            'GRAD' 0,
+                            'opsz' 24;
+
+                        &.filled {
+                            font-variation-settings:
+                                'FILL' 1,
+                                'wght' 400,
+                                'GRAD' 0,
+                                'opsz' 24;
+                        }
+                    }
+                }
+            }
+        }
+
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100vh;
+            height: calc(150vh + 86px);
+            overflow: hidden;
+
+            & li {
+                position: absolute;
+                display: block;
+                list-style: none;
+                background: rgba(255, 255, 255, 0.2);
+                animation: animate 25s linear infinite;
+                bottom: -12vw;
+            }
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+
+            50% {
+                border-radius: 20%;
+            }
+
+            100% {
+                transform: translateY(-2000px) rotate(720deg);
+                opacity: .4;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <ul class="circles"></ul>
+    <header>
+        <a class="logo">PBI Pangkalan Bun</a>
+        <div class="search">
+            <input type="text" class="searchInput" placeholder="Search product.." autocomplete="hidden" spellcheck="false">
+            <span class="searchIcon"><span class="material-symbols-rounded">search</span></span>
+        </div>
+    </header>
+    <section>
+        <div class="content">
+            <h2>Pusat Barang Import</h2>
+            <p>Termurah di Pangkalan Bun</p>
+        </div>
+        <div class="divider"></div>
+        <div class="product"></div>
+        <div class="divider"></div>
+        <footer>
+            <div class="content">
+                <p>Designed by shirokzn</p>
+            </div>
+        </footer>
+    </section>
+    <script defer>
+        window.addEventListener('scroll', function() {
+            var header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0)
+        })
+
+        const ul = document.querySelector('.circles');
+        const numCircles = 20;
+
+        for (let i = 0; i < numCircles; i++) {4
+            const li = document.createElement('li');
+            li.style.left = `${Math.random() * 100}%`;
+            li.style.width = `${Math.random() * 10 + 1}vw`;
+            li.style.height = li.style.width;
+            li.style.animationDelay = `${Math.random() * 10}s`;
+            li.style.animationDuration = `${Math.random() * 20 + 10}s`;
+            ul.appendChild(li);
+        }
+
+        const product = document.querySelector('.product');
+        let productData = [];
+
+        fetch('assets/data.json')
+        .then((response) => response.json())
+        .then((data) => {
+            productData = data;
+            renderProducts(data);
+        })
+
+        function renderProducts(data) {
+            product.innerHTML = '';
+            data.reverse().forEach((data) => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                const img = document.createElement('img');
+                img.setAttribute('src', data.image);
+
+                const name = document.createElement('h3');
+                name.textContent = data.name;
+
+                let decimalPrice = Math.floor(data.price);
+                let properPrice = decimalPrice.toString().split('').reverse().join('').replace(/(\d{3})/g, '$1.').split('').reverse().join('');
+                if (properPrice[0] === '.') {
+                    properPrice = properPrice.slice(1);
+                }
+
+                const price = document.createElement('h6');
+                price.textContent = `Rp. ${properPrice}`;
+
+                const rating = document.createElement('div');
+                rating.classList.add('rating');
+
+                for (let j = 0; j < 5; j++) {
+                    const star = document.createElement('span');
+                    star.classList.add('material-symbols-rounded');
+                    if (j < Math.floor(data.rating)) {
+                        star.classList.add('filled');
+                        star.textContent = 'star'
+                    } else if (j === Math.floor(data.rating) && data.rating % 1 !== 0) {
+                        star.textContent = 'star_half'
+                    } else {
+                        star.textContent = 'star'
+                    }
+                    rating.appendChild(star);
+                }
+
+                const button = document.createElement('button');
+                button.textContent = 'Lihat Detail';
+
+                card.appendChild(img);
+                card.appendChild(name);
+                card.appendChild(price);
+                card.appendChild(rating);
+                card.appendChild(button);
+                product.appendChild(card);
+            })
+        }
+
+        const searchIcon = document.querySelector('.searchIcon');
+        const searchInput = document.querySelector('.searchInput');
+
+        searchIcon.addEventListener('click', () => {
+            document.querySelector('.search').classList.toggle('expanded');
+            if (document.querySelector('.search').classList.contains('expanded')) {
+                searchInput.focus();
+            }
+        });
+
+        searchInput.addEventListener('input', () => {
+            const searchValue = searchInput.value.toLowerCase();
+            const filteredData = productData.filter(product => product.name.toLowerCase().includes(searchValue));
+            renderProducts(filteredData);
+        })
+
+        // const card = document.querySelector('.card');
+    </script>
+</body>
+</html>

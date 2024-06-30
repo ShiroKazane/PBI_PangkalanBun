@@ -1,0 +1,32 @@
+[
+    {
+        "image": "https://raw.githubusercontent.com/ShiroKazane/shirokazane.github.io/master/assets/images/banner.webp",
+        "name": "Testaasdfghjklsdfghjasduiasffmaskdoam",
+        "price": "123456",
+        "rating": ".5"
+    },
+    {
+        "image": "https://raw.githubusercontent.com/ShiroKazane/ShiroAPI/main/src/public/_shiro/UDnq9Qqu9WckFQt.jpg",
+        "name": "Testaasdfghjklsdfghjasduiasffmaskdoam",
+        "price": "1234567",
+        "rating": "2.5"
+    },
+    {
+        "image": "https://raw.githubusercontent.com/ShiroKazane/shirokazane.github.io/master/assets/images/banner.webp",
+        "name": "Testu",
+        "price": "12345678",
+        "rating": "3.5"
+    },
+    {
+        "image": "https://raw.githubusercontent.com/ShiroKazane/shirokazane.github.io/master/assets/images/banner.webp",
+        "name": "Teste",
+        "price": "123456789",
+        "rating": "4"
+    },
+    {
+        "image": "https://raw.githubusercontent.com/ShiroKazane/shirokazane.github.io/master/assets/images/banner.webp",
+        "name": "Testo",
+        "price": "1234567890",
+        "rating": "5"
+    }
+]
