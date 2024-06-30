@@ -42,8 +42,7 @@
             font-family: 'Inter', sans-serif;
             background: #FFB382;  
             background: -webkit-linear-gradient(to left, #FAC898, #FFB382);
-            min-height: calc(100vh + 1vh);
-            height: fit-content;
+            min-height: calc(fit-content + 1vh);
             text-overflow: ellipsis;
             user-select: none;
             -ms-overflow-style: none;
@@ -298,7 +297,7 @@
             left: 0;
             width: 100%;
             min-height: 100vh;
-            height: calc(150vh + 86px);
+            height: calc(250vh + 86px);
             overflow: hidden;
 
             & li {
@@ -466,8 +465,6 @@
             const filteredData = productData.filter(product => product.name.toLowerCase().includes(searchValue));
             renderProducts(filteredData);
         })
-
-        // const card = document.querySelector('.card');
     </script>
 </body>
 </html>
