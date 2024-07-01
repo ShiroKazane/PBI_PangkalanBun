@@ -656,6 +656,7 @@
             
             if (page == totalPages) {
                 beforePage = beforePage - 2;
+                window.scrollTo(0, 0);
             } else if (page == totalPages - 1) {
                 beforePage = beforePage - 1;
             }
@@ -701,27 +702,6 @@
             pagination.innerHTML = liTag;
             return liTag;
         }
-
-        // function updatePagination() {
-        //     const cards = product.querySelectorAll('.card');
-        //     const totalPages = Math.ceil(cards.length / 6);
-            
-        //     prevButton.addEventListener('click', (event) => {
-        //         event.preventDefault;
-        //         if (currentPage > 1) { 
-        //             currentPage--; 
-        //             displayPage(currentPage); 
-        //         } 
-        //     });
-    
-        //     nextButton.addEventListener('click', (event) => {
-        //         event.preventDefault;
-        //         if (currentPage < totalPages) {
-        //             currentPage++; 
-        //             displayPage(currentPage);
-        //         } 
-        //     });
-        // }
 
         const searchIcon = document.querySelector('.searchIcon');
         const searchInput = document.querySelector('.searchInput');
