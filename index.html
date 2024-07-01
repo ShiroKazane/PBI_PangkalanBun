@@ -664,6 +664,7 @@
                 afterPage = afterPage + 2;
             } else if (page == 2) {
                 afterPage  = afterPage + 1;
+                beforePage = Math.max(beforePage, 1);
             }
 
             for (var plength = beforePage; plength <= afterPage; plength++) {
@@ -671,8 +672,8 @@
                     continue;
                 }
 
-                if (plength == 0) {
-                    plength = plength + 1;
+                if (plength <= 0) {
+                    continue;
                 }
 
                 if(page == plength) {
@@ -740,6 +741,7 @@
             const filteredData = productData.filter(product => product.name.toLowerCase().includes(searchValue));
             displayProducts(filteredData);
             displayPage(1);
+            pagination.innerHTML = createPagination(totalPages, currentPage);
         })
 
         fetch('assets/data.json')
