@@ -569,6 +569,10 @@
         const product = document.querySelector('.product');
         let productData = [];
         
+        let currentPage = 1;
+        let totalPages = 0;
+        let totalCards = 0;
+        
         function displayProducts(data) {
             product.innerHTML = '';
             data.reverse().forEach(data => {
@@ -611,14 +615,11 @@
                 card.appendChild(button);
                 product.appendChild(card);
             })
+            totalCards = data.length;
             displayPage(currentPage);
         }
 
         const pagination = document.querySelector('.pagination ul');
-
-        let currentPage = 1;
-        let totalPages = 7;
-        let totalCards = 17;
         
         function displayPage(page) {
             const cards = product.querySelectorAll('.card');
@@ -631,16 +632,16 @@
                 } else {
                     card.style.display = 'none';
                 }
-                totalCards++;
             });
         }
-
-        pagination.innerHTML = createPagination(totalCards, currentPage);
-        function createPagination(totalCards, page){
+        
+        function createPagination(totalPages, page){
             let liTag = '';
             let active;
             let beforePage = page - 1;
             let afterPage = page + 1;
+            
+            totalPages = Math.ceil(totalCards / 6);
 
             if (page > 1) {
                 liTag += `<li class="btn prev" onclick="createPagination(totalPages, ${page - 1})"><span><span class="material-symbols icon prev"></span> Prev</span></li>`;
@@ -746,6 +747,7 @@
         .then((data) => {
             productData = data;
             displayProducts(data);
+            pagination.innerHTML = createPagination(totalPages, currentPage);
         })
     </script>
 </body>
