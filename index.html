@@ -42,7 +42,8 @@
             font-family: 'Inter', sans-serif;
             background: #FFB382;  
             background: -webkit-linear-gradient(to left, #FAC898, #FFB382);
-            min-height: calc(fit-content + 1vh);
+            min-height: fit-content;
+            padding-bottom: 100px;
             text-overflow: ellipsis;
             user-select: none;
             -ms-overflow-style: none;
@@ -60,7 +61,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: calc(100% - 30px);
-            max-width: 1200px;
+            max-width: 900px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -156,10 +157,11 @@
             backdrop-filter: blur(10px);
             min-height: fit-content;
             width: calc(100% - 30px);
-            max-width: 1200px;
+            max-width: 800px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
             padding: 20px;
+            margin-bottom: 15px;
 
             & .content {
                 color: white;
@@ -193,6 +195,7 @@
                 gap: 20px;
 
                 & .card {
+                    position: relative;
                     background: white;
                     border-radius: 10px;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
@@ -278,6 +281,87 @@
                 }
             }
 
+            .pagination ul {
+                position: relative;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                min-height: fit-content;
+                width: fit-content;
+                display: flex;
+                flex-wrap: wrap;
+                background: #fff;
+                padding: 8px;
+                margin-top: 15px;
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, .1);
+
+                & li {
+                    color: #FFB382;
+                    list-style: none;
+                    line-height: 35px;
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    user-select: none;
+                    transition: all 0.3s ease;
+
+                    &.numb {
+                        list-style: none;
+                        height: 35px;
+                        width: 35px;
+                        margin: 0 3px;
+                        line-height: 35px;
+                        border-radius: 50%;
+
+                        &.first {
+                            margin-right: 5px;
+                        }
+
+                        &.last {
+                            margin-left: 5px;
+                        }
+                    }
+
+                    &.dots {
+                        font-size: 16px;
+                        cursor: default;
+                    }
+
+                    &.btn {
+                        padding: 0 10px;
+                        border-radius: 50px;
+                        
+                        & .material-symbols.icon.next {
+                            padding-right: 18px;
+                            background: #FFB382;
+                            mask: url(https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/chevron_right/materialsymbolsrounded/chevron_right_24px.svg) no-repeat left center;
+                        }
+
+                        & .material-symbols.icon.prev {
+                            padding-left: 18px;
+                            background: #FFB382;
+                            mask: url(https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/chevron_left/materialsymbolsrounded/chevron_left_24px.svg) no-repeat right center;
+                        }
+                    }
+
+                    &.active,
+                    &.numb:hover,
+                    &:first-child:hover,
+                    &:last-child:hover {
+                        color: white;
+                        background: #FFB382;
+
+                        &:first-child:hover .material-symbols.icon,
+                        &:last-child:hover .material-symbols.icon {
+                            transition: .6s;
+                            background: white;
+                        }
+                    }
+                }
+            }
+
             & .instagram-media, .instagram-media-registered {
                 position: relative;
                 top: 0;
@@ -292,12 +376,12 @@
         }
 
         .circles {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             min-height: 100vh;
-            height: calc(250vh + 86px);
+            height: calc(100% + 86px);
             overflow: hidden;
 
             & li {
@@ -307,6 +391,75 @@
                 background: rgba(255, 255, 255, 0.2);
                 animation: animate 25s linear infinite;
                 bottom: -12vw;
+            }
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            background-color: #FFB382;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity .5s ease;
+            z-index: 4;
+        }
+
+        .loader {
+            width: 48px;
+            height: 40px;
+            margin-top: 30px;
+            display: inline-block;
+            position: relative;
+            background: #FFF;
+            border-radius: 15% 15% 35% 35%;
+            opacity: 1;
+            transition: opacity .3s ease;
+            z-index: 5;
+
+            &::after {
+                content: '';  
+                box-sizing: border-box;
+                position: absolute;
+                left: 45px;
+                top: 8px;
+                border: 4px solid #FFF;
+                width: 16px;
+                height: 20px;
+                border-radius: 0 4px 4px 0;
+            }
+    
+            &::before {
+                content: '';  
+                position: absolute;
+                width: 1px;
+                height: 10px;
+                color: #FFF;
+                top: -15px;
+                left: 11px;
+                box-sizing: border-box;
+                animation: steam 1s ease infinite;
+            }
+        }
+
+        .hide {
+            opacity: 0;
+            z-index: -1;
+        }
+
+        @keyframes steam {
+            0% {
+                box-shadow: 2px 0px rgba(255, 255, 255, 0), 12px 0px rgba(255, 255, 255, 0.3), 20px 0px rgba(255, 255, 255, 0);
+            }
+            50% {
+                box-shadow: 2px -5px rgba(255, 255, 255, 0.5), 12px -3px rgba(255, 255, 255, 0.5), 20px -2px rgba(255, 255, 255, 0.6);
+            }
+            100% {
+                box-shadow: 2px -8px rgba(255, 255, 255, 0), 12px -5px rgba(255, 255, 255, 0), 20px -5px rgba(255, 255, 255, 0);
             }
         }
 
@@ -338,6 +491,9 @@
     </style>
 </head>
 <body>
+    <div class="preloader">
+        <span class="loader"></span>
+    </div>
     <ul class="circles"></ul>
     <header>
         <a class="logo">PBI Pangkalan Bun</a>
@@ -354,6 +510,9 @@
         <div class="divider"></div>
         <br>
         <div class="product"></div>
+        <div class="pagination">
+            <ul></ul>
+        </div>
         <div class="divider"></div>
         <div class="content">
             <h2>Kunjungi Instagram Kami</h2>
@@ -368,9 +527,27 @@
         </footer>
     </section>
     <script defer>
+        window.onload = () => {
+            window.setTimeout(() => {
+                window.scrollTo(0, 0);
+                const loader = document.querySelector('.loader');
+                loader.classList.add('hide');
+                window.setTimeout(() => {
+                    const preloader = document.querySelector('.preloader');
+                    preloader.classList.add('hide');
+                    window.setTimeout(() => {
+                        preloader.remove();
+                    }, 200);
+                }, 500);
+            }, 800);
+        }
+        
         window.addEventListener('scroll', function() {
             var header = document.querySelector('header');
             header.classList.toggle('sticky', window.scrollY > 0)
+            if (header.classList.length == 0) {
+                header.removeAttribute('class');
+            }
         })
 
         const ul = document.querySelector('.circles');
@@ -379,7 +556,7 @@
         for (let i = 0; i < numCircles; i++) {4
             const li = document.createElement('li');
             li.style.left = `${Math.random() * 100}%`;
-            li.style.width = `${Math.random() * 10 + 1}vw`;
+            li.style.width = `${Math.random() * 10 + 5}vh`;
             li.style.height = li.style.width;
             li.style.animationDelay = `${Math.random() * 10}s`;
             li.style.animationDuration = `${Math.random() * 20 + 10}s`;
@@ -388,35 +565,23 @@
 
         const product = document.querySelector('.product');
         let productData = [];
-
-        fetch('assets/data.json')
-        .then((response) => response.json())
-        .then((data) => {
-            productData = data;
-            renderProducts(data);
-        })
-
-        function renderProducts(data) {
+        
+        function displayProducts(data) {
             product.innerHTML = '';
-            data.reverse().forEach((data) => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-
-                const img = document.createElement('img');
-                img.setAttribute('src', data.image);
-                img.setAttribute('draggable', 'false');
-
-                const name = document.createElement('h3');
-                name.textContent = data.name;
-
+            data.reverse().forEach(data => {
                 let decimalPrice = Math.floor(data.price);
                 let properPrice = decimalPrice.toString().split('').reverse().join('').replace(/(\d{3})/g, '$1.').split('').reverse().join('');
                 if (properPrice[0] === '.') {
                     properPrice = properPrice.slice(1);
                 }
 
-                const price = document.createElement('h6');
-                price.textContent = `Rp. ${properPrice}`;
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${data.image}" alt="${data.name}" draggable="false" />
+                    <h3>${data.name}</h3>
+                    <h6>Rp${properPrice}</h6>
+                `;
 
                 const rating = document.createElement('div');
                 rating.classList.add('rating');
@@ -426,26 +591,132 @@
                     star.classList.add('material-symbols-rounded');
                     if (j < Math.floor(data.rating)) {
                         star.classList.add('filled');
-                        star.textContent = 'star'
+                        star.textContent = 'star';
                     } else if (j === Math.floor(data.rating) && data.rating % 1 !== 0) {
-                        star.textContent = 'star_half'
+                        star.textContent = 'star_half';
                     } else {
-                        star.textContent = 'star'
+                        star.textContent = 'star';
                     }
                     rating.appendChild(star);
                 }
 
                 const button = document.createElement('button');
+                button.className = 'details';
                 button.textContent = 'Lihat Detail';
 
-                card.appendChild(img);
-                card.appendChild(name);
-                card.appendChild(price);
                 card.appendChild(rating);
                 card.appendChild(button);
                 product.appendChild(card);
             })
+            displayPage(currentPage);
         }
+
+        const pagination = document.querySelector('.pagination ul');
+
+        let currentPage = 1;
+        let totalPages = 7;
+        let totalCards = 17;
+        
+        function displayPage(page) {
+            const cards = product.querySelectorAll('.card');
+            const start = (page - 1) * 6;
+            const end =  start + 6;
+
+            cards.forEach((card, index) => {
+                if (index >= start && index < end) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+                totalCards++;
+            });
+        }
+
+        pagination.innerHTML = createPagination(totalCards, currentPage);
+        function createPagination(totalCards, page){
+            let liTag = '';
+            let active;
+            let beforePage = page - 1;
+            let afterPage = page + 1;
+
+            if (page > 1) { //show the next button if the page value is greater than 1
+                liTag += `<li class="btn prev" onclick="createPagination(totalPages, ${page - 1})"><span><span class="material-symbols icon prev"></span> Prev</span></li>`;
+            }
+
+            if (page > 2) { //if page value is less than 2 then add 1 after the previous button
+                liTag += `<li class="first numb" onclick="createPagination(totalPages, 1)"><span>1</span></li>`;
+                if (page > 3) { //if page value is greater than 3 then add this (...) after the first li or page
+                    liTag += `<li class="dots"><span>...</span></li>`;
+                }
+            }
+            // how many pages or li show before the current li
+            if (page == totalPages) {
+                beforePage = beforePage - 2;
+            } else if (page == totalPages - 1) {
+                beforePage = beforePage - 1;
+            }
+            // how many pages or li show after the current li
+            if (page == 1) {
+                afterPage = afterPage + 2;
+            } else if (page == 2) {
+                afterPage  = afterPage + 1;
+            }
+
+            for (var plength = beforePage; plength <= afterPage; plength++) {
+                if (plength > totalPages) { //if plength is greater than totalPage length then continue
+                    continue;
+                }
+
+                if (plength == 0) { //if plength is 0 than add +1 in plength value
+                    plength = plength + 1;
+                }
+
+                if(page == plength) { //if page is equal to plength than assign active string in the active variable
+                    active = "active";
+                    displayPage(page);
+                } else { //else leave empty to the active variable
+                    active = "";
+                }
+                
+                liTag += `<li class="numb ${active}" onclick="createPagination(totalPages, ${plength})"><span>${plength}</span></li>`;
+            }
+
+            if (page < totalPages - 1) { //if page value is less than totalPage value by -1 then show the last li or page
+                if (page < totalPages - 2) { //if page value is less than totalPage value by -2 then add this (...) before the last li or page
+                    liTag += `<li class="dots"><span>...</span></li>`;
+                }
+
+                liTag += `<li class="last numb" onclick="createPagination(totalPages, ${totalPages})"><span>${totalPages}</span></li>`;
+            }
+
+            if (page < totalPages) { //show the next button if the page value is less than totalPage(20)
+                liTag += `<li class="btn next" onclick="createPagination(totalPages, ${page + 1})"><span>Next <span class="material-symbols icon next"></span></span></li>`;
+            }
+            
+            pagination.innerHTML = liTag; //add li tag inside ul tag
+            return liTag; //reurn the li tag
+        }
+
+        // function updatePagination() {
+        //     const cards = product.querySelectorAll('.card');
+        //     const totalPages = Math.ceil(cards.length / 6);
+            
+        //     prevButton.addEventListener('click', (event) => {
+        //         event.preventDefault;
+        //         if (currentPage > 1) { 
+        //             currentPage--; 
+        //             displayPage(currentPage); 
+        //         } 
+        //     });
+    
+        //     nextButton.addEventListener('click', (event) => {
+        //         event.preventDefault;
+        //         if (currentPage < totalPages) {
+        //             currentPage++; 
+        //             displayPage(currentPage);
+        //         } 
+        //     });
+        // }
 
         const searchIcon = document.querySelector('.searchIcon');
         const searchInput = document.querySelector('.searchInput');
@@ -463,7 +734,15 @@
         searchInput.addEventListener('input', () => {
             const searchValue = searchInput.value.toLowerCase();
             const filteredData = productData.filter(product => product.name.toLowerCase().includes(searchValue));
-            renderProducts(filteredData);
+            displayProducts(filteredData);
+            displayPage(1);
+        })
+
+        fetch('assets/data.json')
+        .then((response) => response.json())
+        .then((data) => {
+            productData = data;
+            displayProducts(data);
         })
     </script>
 </body>
