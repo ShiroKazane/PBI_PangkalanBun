@@ -105,11 +105,7 @@
                     cursor: pointer;
 
                     & .material-symbols-rounded {
-                        font-variation-settings:
-                        'FILL' 0,
-                        'wght' 400,
-                        'GRAD' 0,
-                        'opsz' 24;
+                        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
                     }
                 }
 
@@ -181,6 +177,10 @@
                     font-weight: 600;
                     text-shadow: 2px 2px 0 rgba(0, 0, 0, .1);
                 }
+
+                & .not {
+                    display: none;
+                }
             }
 
             & .divider {
@@ -209,17 +209,47 @@
                         transform: scale(1.01);
                         box-shadow: 0 4px 16px rgba(0, 0, 0, .1);
 
-                        & button {
+                        & .img .wrapper {
                             opacity: 1;
                             visibility: visible;
                         }
                     }
 
-                    & img {
+                    & .img {
+                        position: relative;
                         width: 100%;
                         height: auto;
                         aspect-ratio: 1 / 1;
-                        object-fit: cover;
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+
+                        & .wrapper {
+                            opacity: 0;
+                            width: 100%;
+                            color: white;
+                            visibility: hidden;
+                            line-height: 224px;
+                            text-align: center;
+                            transition: opacity .3s;
+
+                            & a {
+                                position: absolute;
+                                bottom: 15px;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                width: 150px;
+                                color: white;
+                                background-color: #FFB382;
+                                padding: 0 1em;
+                                display: inline-block;
+                                height: 40px;
+                                line-height: 40px;
+                                border-radius: 20px;
+                                cursor: pointer;
+                                text-decoration: none;
+                            }
+                        }
                     }
 
                     & h3 {
@@ -238,24 +268,6 @@
                         margin: 15px;
                         font-size: 1em;
                     }
-
-                    & button {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        background: #FFB382;
-                        color: white;
-                        font-size: 1em;
-                        border: none;
-                        border-radius: 24px;
-                        padding: 10px 20px;
-                        width: 128px;
-                        cursor: pointer;
-                        opacity: 0;
-                        visibility: hidden;
-                        transition: opacity .3s ease, visibility .3s ease;
-                    }
                 }
 
                 & .rating {
@@ -266,18 +278,10 @@
                     & .material-symbols-rounded {
                         color: #FFB382;
                         margin: 0 2px;
-                        font-variation-settings:
-                            'FILL' 0,
-                            'wght' 400,
-                            'GRAD' 0,
-                            'opsz' 24;
+                        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 
                         &.filled {
-                            font-variation-settings:
-                                'FILL' 1,
-                                'wght' 400,
-                                'GRAD' 0,
-                                'opsz' 24;
+                            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
                         }
                     }
                 }
@@ -506,6 +510,95 @@
                 opacity: 1;
             }
         }
+
+        @media only screen and (min-width: 320px) and (max-width: 439px) {
+            header {
+                padding: 12px;
+                border-radius: 10px;
+
+                & .logo {
+                    font-size: .9em;
+                }
+            }
+
+            section {
+                top: 90px;
+                border-radius: 10px;
+
+                & .content h2 {
+                    font-size: 1.2em;
+                }
+
+                & .content p {
+                    font-size: .8em;
+                }
+
+                & .divider {
+                    margin: 10px auto;
+                }
+
+                & .product {
+                    justify-content: center;
+                    grid-template-columns: repeat(auto-fill, minmax(150px, .9fr));
+                    gap: 15px;
+
+                    & .card h3 {
+                        min-height: 36px;
+                        font-size: .9em;
+                    }
+
+                    & .card h6 {
+                        margin: 12px;
+                        font-size: .9em;
+                    }
+                }
+
+                .pagination ul {
+                    border-radius: 8px;
+
+                    & li {
+                        font-size: 12px;
+                        line-height: 20px;
+
+                        &.numb {
+                            height: 20px;
+                            width: 20px;
+                            line-height: 20px;
+                            margin: 0 1px;
+                        }
+
+                        &.dots {
+                            font-size: 12px;
+                            line-height: 20px;
+                        }
+
+                        &.btn {
+                            padding: 0 6px;
+
+                            & .material-symbols.icon.next {
+                                padding-right: 14px;
+                                background: #FFB382;
+                                mask: url(https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/chevron_right/materialsymbolsrounded/chevron_right_20px.svg) no-repeat left center;
+                            }
+
+                            & .material-symbols.icon.prev {
+                                padding-left: 14px;
+                                background: #FFB382;
+                                mask: url(https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/chevron_left/materialsymbolsrounded/chevron_left_20px.svg) no-repeat right center;
+                            }
+                        }
+                    }
+                }
+
+                & .instagram-media, .instagram-media-registered {
+                    border-radius: 10px !important;
+                }
+            }
+        }
+
+        @media only screen and (min-width: 440px) and (max-width: 767px) {
+            
+        }
     </style>
 </head>
 <body>
@@ -526,8 +619,8 @@
             <p>Termurah di Pangkalan Bun</p>
         </div>
         <div class="divider"></div>
-        <br>
         <div class="product"></div>
+        <div class="content not"></div>
         <div class="pagination">
             <ul></ul>
         </div>
@@ -587,49 +680,55 @@
         let currentPage = 1;
         let totalPages = 0;
         let totalCards = 0;
+
+        const contentNot = document.querySelector('.content.not');
         
         function displayProducts(data) {
             product.innerHTML = '';
-            data.reverse().forEach(data => {
-                let decimalPrice = Math.floor(data.price);
-                let properPrice = decimalPrice.toString().split('').reverse().join('').replace(/(\d{3})/g, '$1.').split('').reverse().join('');
-                if (properPrice[0] === '.') {
-                    properPrice = properPrice.slice(1);
-                }
-
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <img src="${data.image}" alt="${data.name}" draggable="false" />
-                    <h3>${data.name}</h3>
-                    <h6>Rp${properPrice}</h6>
-                `;
-
-                const rating = document.createElement('div');
-                rating.classList.add('rating');
-
-                for (let j = 0; j < 5; j++) {
-                    const star = document.createElement('span');
-                    star.classList.add('material-symbols-rounded');
-                    if (j < Math.floor(data.rating)) {
-                        star.classList.add('filled');
-                        star.textContent = 'star';
-                    } else if (j === Math.floor(data.rating) && data.rating % 1 !== 0) {
-                        star.textContent = 'star_half';
-                    } else {
-                        star.textContent = 'star';
+            contentNot.innerHTML = '';
+            if (data[0]) {
+                data.reverse().forEach(data => {
+                    let decimalPrice = Math.floor(data.price);
+                    let properPrice = decimalPrice.toString().split('').reverse().join('').replace(/(\d{3})/g, '$1.').split('').reverse().join('');
+                    if (properPrice[0] === '.') {
+                        properPrice = properPrice.slice(1);
                     }
-                    rating.appendChild(star);
-                }
-
-                const button = document.createElement('button');
-                button.className = 'details';
-                button.textContent = 'Lihat Detail';
-
-                card.appendChild(rating);
-                card.appendChild(button);
-                product.appendChild(card);
-            })
+    
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <div class="img" style="background-image: url(${data.image})" alt="${data.name}" draggable="false">
+                            <div class="wrapper">
+                                <a class="btn">Lihat Produk</a>
+                            </div>
+                        </div>
+                        <h3>${data.name}</h3>
+                        <h6>Rp${properPrice}</h6>
+                    `;
+    
+                    const rating = document.createElement('div');
+                    rating.classList.add('rating');
+    
+                    for (let j = 0; j < 5; j++) {
+                        const star = document.createElement('span');
+                        star.classList.add('material-symbols-rounded');
+                        if (j < Math.floor(data.rating)) {
+                            star.classList.add('filled');
+                            star.textContent = 'star';
+                        } else if (j === Math.floor(data.rating) && data.rating % 1 !== 0) {
+                            star.textContent = 'star_half';
+                        } else {
+                            star.textContent = 'star';
+                        }
+                        rating.appendChild(star);
+                    }
+    
+                    card.appendChild(rating);
+                    product.appendChild(card);
+                })
+            } else {
+                notFound('Produk Tidak Tersedia')
+            }
             totalCards = data.length;
             displayPage(currentPage);
         }
@@ -718,6 +817,13 @@
             return liTag;
         }
 
+        function notFound(message) {
+            const content = document.querySelector('.content.not');
+            content.innerHTML = `<h2>${message}</h2>`;
+            content.style.fontSize = '24px';
+            content.style.display = 'block';
+        }
+
         const searchIcon = document.querySelector('.searchIcon');
         const searchInput = document.querySelector('.searchInput');
 
@@ -754,9 +860,13 @@
         fetch('assets/data.json')
         .then((response) => response.json())
         .then((data) => {
-            productData = data;
-            displayProducts(data);
-            pagination.innerHTML = createPagination(totalPages, currentPage);
+            if (data[0]) {
+                productData = data;
+                displayProducts(data);
+                pagination.innerHTML = createPagination(totalPages, currentPage);
+            } else {
+                notFound('Produk Kosong')
+            }
         })
     </script>
 </body>
