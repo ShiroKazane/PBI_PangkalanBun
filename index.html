@@ -122,6 +122,7 @@
                     padding: 5px;
                     width: 100%;
                     display: none;
+                    caret-color: #FFB382;
                     transition: width .4s ease;
                 }
 
@@ -710,11 +711,23 @@
             document.querySelector('.search').classList.toggle('expanded');
             if (document.querySelector('.search').classList.contains('expanded')) {
                 searchInput.focus();
-                document.querySelector('.logo').textContent = 'PBI PB'
-            } else {
-                document.querySelector('.logo').textContent = 'PBI Pangkalan Bun'
             }
         });
+
+        searchInput.addEventListener('blur', () => {
+            document.querySelector('.search').classList.toggle('expanded');
+        });
+
+        document.addEventListener('keydown', (event) => {
+            const keybind = event.key;
+            if (keybind == '/') {
+                if (!document.querySelector('.search').classList.contains('expanded')) {
+                    event.preventDefault();
+                    document.querySelector('.search').classList.toggle('expanded');
+                    searchInput.focus();
+                }
+            }
+        })
 
         searchInput.addEventListener('input', () => {
             const searchValue = searchInput.value.toLowerCase();
